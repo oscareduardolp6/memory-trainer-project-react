@@ -6,7 +6,11 @@ import { SubmitButton } from './SubmitButton';
 export const NumberOfWordsSelector = ({ setWords }) => {
   const initialState = { numberOfWords: 0 }
   const [form, handleChange] = useForm(initialState); 
-  const handleSubmit = () => setWords(form.NumberOfWords)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setWords(form.NumberOfWords)
+    console.log(form);  
+  }
 
   return(
       <form onSubmit={handleSubmit}>
