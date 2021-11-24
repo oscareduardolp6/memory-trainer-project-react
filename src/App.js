@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useFase } from './hooks/useFase'
+import { useState } from 'react';
+import { NumberOfWordsSelector } from './components/NumberOfWordsSelector'
+import { Center } from './components/Center'
+import { Card } from './components/Card'
 import './App.css';
 
+const useApp = (inialState) => {
+  const [state, setState] = useState(inialState); 
+  const setNumberOfWords = (numberOfWords) =>  setState({ numberOfWords: numberOfWords, ...state})
+  return [
+    state, 
+    setNumberOfWords
+  ]
+}
+
 function App() {
+  const initialState = {
+    numberOfWords: 0,
+  }
+  const [fase, nextFase, reset] = useFase(); 
+  const [data, setNumberOfWords ] = useApp(initialState); 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Card>
+        <Center style={ {marginTop: '5%'} }>
+          <h1 className='App-title'>Entrenador de Memoria</h1>
+          {fase === 1 ? <NumberOfWordsSelector setWords={setNumberOfWords} /> : null}
+        </Center>
+      </Card>
     </div>
   );
 }
