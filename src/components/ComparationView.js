@@ -1,20 +1,22 @@
+import { useState } from "react"
 import useForm from "../hooks/useForm"
-import { Input } from './Input'
 import { ComparationAnswer } from "./ComparationAnswer"
 import './ComparationView.css'
+import { SubmitButton } from "./SubmitButton"
 
 export const ComparationView = ({wordsArray}) =>{
   let initialState = {}
-  wordsArray.forEach((element, index) => initialState[`word${index}`] = '')
+  let initialColors = []; 
+  wordsArray.forEach((element, index) => {
+    initialState[`word${index}`] = ''
+    initialColors[index] = ''
+  })
   const [form, handleChange] = useForm(initialState)
-  const divStyle = {
-    display: 'flex' ,
-    flexDirection: 'column', 
-    marginLeft: '5em'
-  }
+  const [color, setColor] = useState(initialColors); 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    console.log('hola');
+    const newColors = wordsArray.map((elem, index) => elem === form[`word${index}`] ? 'correct' : 'incorrect')
+    setColor(newColors); 
   }
 
   return(
@@ -29,30 +31,11 @@ export const ComparationView = ({wordsArray}) =>{
               name={`word${index}`}
               value={form[`word${index}`]}
               onChange={handleChange}
-              className={index % 10 > 1 ? 'column1' : ''}
+              className={color[index]}
               style={{width: '80%'}}  /> )}
         </div>
       </div>
-    </form>
-  )
-
-  return(
-    <form>
-      <div>
-        <div className="answersContainer">
-        {wordsArray.map((word, index) => (
-          <div style={divStyle} key={`word${index}`}>
-          <Input 
-            label={`Palabra ${index + 1}`} 
-            type="text" 
-            name={`word${index}`} 
-            value={form[`word${index}`]} 
-            onChange={handleChange} 
-            className={index % 10 > 1 ? 'column1': ''} 
-            style={{width: '80%'}}/> 
-          </div>))}
-        </div>
-      </div>
+      <SubmitButton>Comparar</SubmitButton>
     </form>
   )
 }

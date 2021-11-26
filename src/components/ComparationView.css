@@ -5,5 +5,10 @@
   row-gap: 2em;
 }
 
-.column1 {
+.correct{
+  background-color: green; 
+}
+
+.incorrect{
+  background-color: red; 
 }
