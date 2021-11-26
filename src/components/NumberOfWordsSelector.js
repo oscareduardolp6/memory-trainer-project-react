@@ -8,7 +8,7 @@ export const NumberOfWordsSelector = ({ setWords, updateFase }) => {
   const [form, handleChange] = useForm(initialState)
   const handleSubmit = (e) => {
     e.preventDefault()
-    setWords(form.NumberOfWords)
+    setWords(Number(form.numberOfWords))
     updateFase()
   }
 

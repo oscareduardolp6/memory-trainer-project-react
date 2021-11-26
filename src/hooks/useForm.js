@@ -6,6 +6,7 @@ const useForm = (initialState) => {
     ...formulario,
     [e.target.name]: e.target.value
   })
+  console.log(formulario);
   const reset = () => setFormulario(initialState)
   return [formulario, handleChange, reset]; 
 }

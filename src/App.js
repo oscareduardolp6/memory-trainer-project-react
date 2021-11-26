@@ -5,6 +5,7 @@ import { Card } from './components/Card'
 import { useApp } from "./hooks/useApp";
 import './App.css';
 import { WordsSelector } from './components/WordsSelector';
+import { useEffect } from 'react';
 
 
 function App() {
@@ -16,13 +17,14 @@ function App() {
     fase, 
     nextFase, 
     reset
-  ] = useFase(2); 
+  ] = useFase(1); 
 
   const [
     data, 
     setNumberOfWords,
     addWord 
   ] = useApp(initialState, nextFase); 
+
   return (
     <div>
       <Card>
@@ -31,9 +33,9 @@ function App() {
           {fase === 1 ? <NumberOfWordsSelector setWords={setNumberOfWords} updateFase={nextFase}/> : null}
           {fase === 2 ? <WordsSelector addWord={addWord} /> : ''}
         </Center>
-      </Card>
-    </div>
-  );
+      </Card>  
+    </div>      
+  )
 }
 
 export default App;
