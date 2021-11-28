@@ -5,6 +5,7 @@ import { Card } from './components/Card'
 import { useApp } from "./hooks/useApp";
 import { WordsSelector } from './components/WordsSelector';
 import { ComparationView } from './components/ComparationView'
+import { palette1 } from './style/palette';
 import './App.css';
 
 
@@ -12,6 +13,10 @@ function App() {
   const initialState = {
     numberOfWords: 0,
     rememberedWords: []
+  }
+
+  const resetButtonStyle = {
+    backgroundColor: palette1.fourth
   }
   const [
     fase, 
@@ -26,7 +31,7 @@ function App() {
   ] = useApp(initialState, nextFase); 
 
   return (
-    <div>
+    <div className="main-content">
       <Card>
         <Center style={ {marginTop: '25%'} }>
           <h1 className='App-title'>Entrenador de Memoria</h1>
@@ -35,6 +40,7 @@ function App() {
           {fase === 3 ? <ComparationView wordsArray={data.rememberedWords} /> : null }
         </Center>
       </Card>  
+      <button onClick={reset} className='resetButton' style={resetButtonStyle}>Reiniciar</button>
     </div>      
   )
 }

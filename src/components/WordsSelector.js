@@ -1,7 +1,8 @@
 import { options } from '../private/apiConfig'
 import { Center } from "./Center"
 import { useEffect, useState } from 'react'
-import { SubmitButton } from './SubmitButton';
+import { SubmitButton } from './SubmitButton'
+import { capitalize } from '../Utils/capitalize'
 
 import './WordsSelector.css'
 
@@ -13,8 +14,6 @@ const getWord = async () => {
   const word = await json.body.Word 
   return word 
 }; 
-
-const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export const WordsSelector = ({addWord}) => {
   const [state, setState] = useState('Cargando...'); 

@@ -2,7 +2,14 @@ body {
   color: #eee;
   background: #292929;
 }
-  
+
+.resetButton{
+  width: 5em;
+  border-radius: 20px;
+   position: absolute; 
+  top: 90%; 
+  right: 10%;   
+}
 /* .App-title{
 
 

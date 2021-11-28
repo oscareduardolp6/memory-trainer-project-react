@@ -1,8 +1,10 @@
 import { useState } from "react"
 import useForm from "../hooks/useForm"
 import { ComparationAnswer } from "./ComparationAnswer"
-import './ComparationView.css'
 import { SubmitButton } from "./SubmitButton"
+import { Center } from "./Center"
+
+import './ComparationView.css'
 
 export const ComparationView = ({wordsArray}) =>{
   let initialState = {}
@@ -15,7 +17,10 @@ export const ComparationView = ({wordsArray}) =>{
   const [color, setColor] = useState(initialColors); 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    const newColors = wordsArray.map((elem, index) => elem === form[`word${index}`] ? 'correct' : 'incorrect')
+    const newColors = wordsArray.map((elem, index) => 
+      elem.toUpperCase() === form[`word${index}`].toUpperCase()
+        ? 'correct' 
+        : 'incorrect')
     setColor(newColors); 
   }
 
@@ -35,7 +40,9 @@ export const ComparationView = ({wordsArray}) =>{
               style={{width: '80%'}}  /> )}
         </div>
       </div>
-      <SubmitButton>Comparar</SubmitButton>
+      <Center>
+        <SubmitButton>Comparar</SubmitButton>
+      </Center>
     </form>
   )
 }
